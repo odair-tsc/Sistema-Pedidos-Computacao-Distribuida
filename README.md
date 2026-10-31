@@ -2,6 +2,16 @@
 
 Aplicação distribuída desenvolvida como projeto acadêmico da disciplina de **Computação Distribuída**. O sistema permite cadastrar pedidos, armazená-los em uma fila de mensagens e realizar seu processamento de forma assíncrona, utilizando serviços independentes integrados por Docker Compose.
 
+## Integrantes do grupo
+
+Projeto desenvolvido pelos integrantes:
+
+- Odair Flores Valentim
+- Carlos Vinicius Braga dos Santos
+- Bruna Araújo Barreto
+- Lucas Junior Arteaga Yucra
+**Disciplina: ** Computação Distribuída
+
 ## Dashboard
 
 O sistema possui uma interface web para cadastrar pedidos, acompanhar seu processamento e visualizar os indicadores da aplicação.
