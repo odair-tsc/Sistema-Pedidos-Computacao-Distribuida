@@ -1,5 +1,5 @@
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import redis
 import json
 import os
@@ -42,6 +42,10 @@ def preparar_banco():
 
 
 preparar_banco()
+
+@app.route("/", methods=["GET"])
+def inicio():
+    return render_template("index.html")
 
 
 @app.route("/health", methods=["GET"])

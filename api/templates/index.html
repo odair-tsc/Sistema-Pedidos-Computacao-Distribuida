@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos Distribuídos | Dashboard</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/app.js" defer></script>
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">P</div>
+                <div>
+                    <h2>Pedidos</h2>
+                    <span>Sistema distribuído</span>
+                </div>
+            </div>
+
+            <nav class="navigation">
+                <a href="#" class="nav-link active">
+                    <span>▦</span>
+                    Dashboard
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <span class="status-indicator"></span>
+                Sistema de pedidos
+            </div>
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <span class="breadcrumb">Sistema / Dashboard</span>
+                    <h1>Dashboard</h1>
+                    <p>Acompanhe o processamento dos pedidos em tempo real.</p>
+                </div>
+
+                <div class="header-status">
+                    <span class="status-indicator"></span>
+                    <span id="api-status">Verificando API...</span>
+                </div>
+            </header>
+
+            <section class="metrics-grid">
+
+                <article class="metric-card">
+                    <div class="metric-header">
+                        <span>Total de pedidos</span>
+                        <span class="metric-icon blue">▤</span>
+                    </div>
+                    <strong id="total-pedidos">0</strong>
+                    <small>Pedidos registrados</small>
+                </article>
+
+                <article class="metric-card">
+                    <div class="metric-header">
+                        <span>Concluídos</span>
+                        <span class="metric-icon green">✓</span>
+                    </div>
+                    <strong id="pedidos-concluidos">0</strong>
+                    <small>Processados com sucesso</small>
+                </article>
+
+                <article class="metric-card">
+                    <div class="metric-header">
+                        <span>Pendentes</span>
+                        <span class="metric-icon orange">◷</span>
+                    </div>
+                    <strong id="pedidos-pendentes">0</strong>
+                    <small>Aguardando processamento</small>
+                </article>
+
+                <article class="metric-card">
+                    <div class="metric-header">
+                        <span>Com erro</span>
+                        <span class="metric-icon red">!</span>
+                    </div>
+                    <strong id="pedidos-erro">0</strong>
+                    <small>Pedidos com falha</small>
+                </article>
+
+            </section>
+
+            <section class="content-grid">
+
+                <article class="panel new-order-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Novo pedido</h2>
+                            <p>Cadastre um pedido para processamento.</p>
+                        </div>
+                    </div>
+
+
+                    <form id="form-pedido">
+                        <label for="produto">Nome do produto</label>
+
+                        <div class="product-input-group">
+                            <input type="text" id="produto" name="produto" placeholder="Ex.: Teclado, Mouse, Monitor..."
+                                autocomplete="off">
+
+                            <button type="button" id="btn-adicionar">
+                                + Adicionar
+                            </button>
+                        </div>
+
+                        <div class="pending-header">
+                            <strong>Produtos adicionados</strong>
+                            <span id="quantidade-produtos">0 itens</span>
+                        </div>
+
+                        <ul id="lista-produtos" class="product-list">
+                            <li class="product-empty">
+                                Nenhum produto adicionado.
+                            </li>
+                        </ul>
+
+                        <button type="submit" id="btn-cadastrar">
+                            Cadastrar todos os pedidos
+                        </button>
+
+                        <p id="mensagem-form" class="form-message"></p>
+                    </form>
+
+                </article>
+
+                <article class="panel services-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Serviços</h2>
+                            <p>Componentes da aplicação.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div>
+                            <strong>API REST</strong>
+                            <small>Flask</small>
+                        </div>
+                        <span id="status-api" class="service-status">Verificando</span>
+                    </div>
+
+                    <div class="service-item">
+                        <div>
+                            <strong>Fila de mensagens</strong>
+                            <small>Redis</small>
+                        </div>
+                        <span id="status-redis" class="service-status">Verificando</span>
+                    </div>
+
+                    <div class="service-item">
+                        <div>
+                            <strong>Banco de dados</strong>
+                            <small>SQLite</small>
+                        </div>
+                        <span id="status-banco" class="service-status">Verificando</span>
+                    </div>
+
+                    <div class="service-item">
+                        <div>
+                            <strong>Processador</strong>
+                            <small>Worker</small>
+                        </div>
+                        <span class="service-status neutral">Via logs</span>
+                    </div>
+                </article>
+
+            </section>
+
+            <section class="panel orders-panel">
+                <div class="panel-header orders-header">
+                    <div>
+                        <h2>Pedidos registrados</h2>
+                        <p>Lista de pedidos e seus respectivos estados.</p>
+                    </div>
+
+                    <button type="button" id="btn-atualizar" class="secondary-button">
+                        Atualizar
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Produto</th>
+                                <th>Estado</th>
+                                <th>Resultado</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="lista-pedidos">
+                            <tr>
+                                <td colspan="4" class="empty-message">
+                                    Carregando pedidos...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <footer class="footer">
+                Sistema de Processamento Distribuído de Pedidos
+            </footer>
+
+        </main>
+    </div>
+
+</body>
+
+</html>
