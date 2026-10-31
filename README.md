@@ -10,7 +10,8 @@ Projeto desenvolvido pelos integrantes:
 - Carlos Vinicius Braga dos Santos
 - Bruna Araújo Barreto
 - Lucas Junior Arteaga Yucra
-**Disciplina: ** Computação Distribuída
+
+**Disciplina:** Computação Distribuída
 
 ## Dashboard
 
